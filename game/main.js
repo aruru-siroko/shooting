@@ -38,6 +38,20 @@ window.addEventListener("keydown", (e)   => {
     }  
 });
 
+function update(){
+    for(let i = 0; i < bullets.length; i++) {
+        const bullet = bullets[i];
+        bullet.y += bullet.vy;
+
+        if(bullet.y < 0){
+            bullets.splice(i, 1);
+            i--;
+        }
+    }
+}
+
+
+
 function draw(){
 
     ctx.fillStyle = "black";
