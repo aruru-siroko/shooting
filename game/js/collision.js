@@ -1,7 +1,6 @@
 import { player } from "./player.js";
 import { enemies } from "./enemies.js";
-import { bullets } from "./main.js";
-
+import { bullets} from "./main.js";
 
 export function handleCollisions() {
   // 弾 × 敵
@@ -18,7 +17,8 @@ export function handleCollisions() {
         // 命中：弾と敵を削除、スコア加算
         bullets.splice(bi, 1);
         enemies.splice(ei, 1);
-       // score += 1;
+        console.log("Score:", player.score);
+      player.score += 1;
         hit = true;
         break; // この敵は消えたので次の敵へ
       }
@@ -27,25 +27,30 @@ export function handleCollisions() {
     if (hit) continue;
   }
 
-  // 自機 × 敵（ゲームオーバー）
+  // 自機 × 敵機（ゲームオーバー）
   for (let ei = enemies.length - 1; ei >= 0; ei--) {
     const e = enemies[ei];
     if (rectsIntersect(
       { x: player.x, y: player.y, width: player.width, height: player.height },
       { x: e.x, y: e.y, width: e.width, height: e.height }
     )) {
-    //  isGameOver = true;
+      player.life -= 1;
+      if(player.life<=0){
+         document.location.reload();
+      }
+      enemies.splice(ei, 1);
+      console.log("Player Life:", player.life);
+    //   isGameOver = true;
       break;
     }
   }
 }
 
-
 function rectsIntersect(a, b) {
   return (
-    a.x > b.x + b.width &&
-    a.x + a.width < b.x &&
-    a.y > b.y + a.height &&
-    a.y + a.height < b.y
+    a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y
   );
-}
+} 

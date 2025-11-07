@@ -1,5 +1,7 @@
 export const enemies = [];
 const SIZE = 26;
+const enemyImage = new Image();
+enemyImage.src = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinl4gIT4fCalYwr0MXiPalCXkMlX_tUjY__HJaZ2AHZBfeu6hX62cpOI7-xbPb0VSgIqKEDhqq3ACrrbYahUdeZj4pKjoVfqcvHxnGc0CRR8zw7siXa-QJB0RbNXrFbxWyyh64Owe6V9c/s400/sentouki.png/enemy.png";
 
 function pushEnemies(canvas) {
 const w= SIZE;
@@ -12,7 +14,7 @@ enemies.push({x,y,width:w,height:h,vy});
 }
 
 export function spawnEnemy(canvas) {
-    if(enemies.length < 5){
+    if(enemies.length < 6){
     pushEnemies(canvas);
     }
 }
@@ -33,6 +35,6 @@ export function spawnEnemy(canvas) {
  export function drawEnemies(ctx) {
    ctx.fillStyle = "crimson";
    for (const e of enemies) {
-     ctx.fillRect(e.x, e.y, e.width, e.height);
+     ctx.drawImage(enemyImage.x, e.y, e.width, e.height);
  }
 }

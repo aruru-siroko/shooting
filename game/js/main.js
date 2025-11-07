@@ -5,6 +5,7 @@ import { handleCollisions } from "./collision.js";
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+
 initPlayer (canvas);
 
 export const bullets = [];
@@ -20,7 +21,13 @@ function tryshoot() {
     })
 }
 
-         
+function updateScore(){
+  const scoreBoard = document.getElementById("scoreBoard"); 
+ scoreBoard.innerText = `Score: ${player.score}`;
+const lifeBoard = document.getElementById("lifeBoard");
+ lifeBoard.innerText = `Life: ${player.life}`;
+}
+
 window.addEventListener("keydown", (e)   => {
     if(e.key === "ArrowLeft"){
         if(player.x > 0){
@@ -48,6 +55,7 @@ function update(){
     spawnEnemy(canvas);
     updateEnemies(canvas);
     handleCollisions();
+    updateScore();
 }
 
 
