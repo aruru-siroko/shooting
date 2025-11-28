@@ -16,7 +16,7 @@ function tryshoot() {
          x: player.x,
          y: player.y,
         width: 5,
-        height: 5,
+        height: 11,
         vy: BULLET_SPEED,
     })
 }
